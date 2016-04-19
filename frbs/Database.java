@@ -102,11 +102,7 @@ public class Database {
         */
         
         double dist=(rangesVar[var][1]-rangesVar[var][0])/(nSets-1);//Distancia del centro del triángulo a uno de los bordes
-        System.out.println("VAR: " + var);
-        System.out.println("Distancia: " + dist);
-        System.out.println("Range Sup: " + rangesVar[var][1]);
-        System.out.println("Range inf: " + rangesVar[var][0]);
-        System.out.println("Vars: " + (nSets-1));
+
         //Se generan primero los triángulos de los extremos, pues son casos especiales ya que pueden tener la mitad del area
         
         if (OpenRange)//Los triángulos no se cortan
@@ -166,12 +162,14 @@ public class Database {
                 System.out.println("ERROR: Al crear un triángulo intermedio, las coordenadas X no están en orden. ¿nsets inválido");
             }
             centro += dist;
-            System.out.println("Set: " + sets[i]);
         }
-        
+
         //Fijamos la partición a la variable difusa.
         try {
-            variables[var]=new FuzzyVariable("Var" + Integer.toString(var),rangesVar[var][0],rangesVar[var][1]);
+            if (OpenRange)
+                variables[var]=new FuzzyVariable("Var" + Integer.toString(var),rangesVar[var][0]-dist,rangesVar[var][1]+dist);
+            else
+                variables[var]=new FuzzyVariable("Var" + Integer.toString(var),rangesVar[var][0],rangesVar[var][1]);
             variables[var].setPartition(sets);
         } catch (Exception e) {
             System.out.println("Error al fijar la partición a la variable "+var+". Excepción: "+e);

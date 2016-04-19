@@ -30,10 +30,10 @@ public class FuzzyVariable extends nrc.fuzzy.FuzzyVariable{
         super.removeTerms();
         sets = pSets;
         nSets = sets.length;       
+        System.out.println(this.getMinUOD() + " " + this.getMaxUOD());
         for (int i = 0; i < pSets.length; i++) {
-            System.out.println(i + " " + sets[i]);
             // Añadir los términos (FuzzySets) que definen las particiones de la variable difusa i
-            //Añado el término a la variable difusa, uso la variable i como nombre de etiqueta y el conjunto difuso del array
+            //Añado el término a la variable difusa, uso la variable i como nombre de etiqueta y el conjunto difuso del array   
             this.addTerm(Integer.toString(i), sets[i]);
         }
     }
